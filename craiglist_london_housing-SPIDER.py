@@ -3,8 +3,7 @@ import scrapy
 
 
 class CraiglistLondonHousingSpider(scrapy.Spider):
-    #1.Seite= Text, Link, Datum
-    #2. Seite (nach anklicken aufs Objekt): description, post id
+    
     name = 'craiglist_london_housing'
     allowed_domains = ['london.craigslist.org']
     start_urls = ['https://london.craigslist.org/d/flats-housing-for-rent/search/apa']
@@ -16,11 +15,7 @@ class CraiglistLondonHousingSpider(scrapy.Spider):
             link=house.xpath(".//a[@class='result-title hdrlnk']/@href").get()
             date=house.xpath(".//time[@class='result-date']/text()").get()
 
-            # yield{
-            #      'house_name':name,
-            #      'house_link':link,
-            #      'house_date':date
-            #}
+        
 
             yield scrapy.Request(link,
                                 callback=self.parse_listing,
